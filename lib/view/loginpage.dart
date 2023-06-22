@@ -28,9 +28,9 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Container(
               child: const Text(
-                "Aplikasi Perpustakaan.",
+                "Aplikasi Khusus Admin Perpustakaan.",
                 style: TextStyle(
-                    color: Colors.redAccent,
+                    color: Colors.black,
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
               ),
@@ -109,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       const Text(
                         "Tidak meiliki Akun",
-                        style: TextStyle(color: Colors.grey),
+                        style: TextStyle(color: Colors.black),
                       ),
                       TextButton(
                         onPressed: () {

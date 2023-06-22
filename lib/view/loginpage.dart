@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               alignment: Alignment.center,
               child: Image.asset(
-                "images/logoapp.png",
+                "images/resizelogoapp.png",
                 width: 200,
                 height: 300,
               ),
@@ -89,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.only(top: 70),
+                    padding: const EdgeInsets.only(top: 50),
                     child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(

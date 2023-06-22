@@ -16,6 +16,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.brown[100],
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -41,24 +42,23 @@ class _RegisterPageState extends State<RegisterPage> {
             Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.only(top: 20),
-              width: 150.0,
-              height: 150.0,
+              width: 170.0,
+              height: 170.0,
               decoration: const BoxDecoration(
-                shape: BoxShape.circle,
                 image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: AssetImage('images/logoapp.png'),
+                  image: AssetImage('images/resizelogoapp.png'),
                 ),
               ),
             ),
             Container(
-              padding: const EdgeInsets.only(top: 40),
+              padding: const EdgeInsets.only(),
               alignment: Alignment.center,
               child: const Text(
                 "Daftar",
                 style: TextStyle(
                     fontSize: 30,
-                    color: Colors.redAccent,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold),
               ),
             ),
@@ -139,34 +139,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       border: UnderlineInputBorder(),
                       hintStyle: TextStyle(fontSize: 20),
                       hintText: "Masukan Password Anda",
-                      prefixIcon: Icon(
-                        Icons.lock,
-                        color: Colors.redAccent,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(top: 30, left: 30),
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    "Re-Password",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Colors.redAccent,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  child: TextFormField(
-                    controller: _passwordController,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      hintStyle: TextStyle(fontSize: 20),
-                      hintText: "Masukan Re-Password Anda",
                       prefixIcon: Icon(
                         Icons.lock,
                         color: Colors.redAccent,

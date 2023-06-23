@@ -30,9 +30,10 @@ class _LoginPageState extends State<LoginPage> {
               child: const Text(
                 "Aplikasi Khusus Admin Perpustakaan.",
                 style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             Form(
@@ -53,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                     padding: const EdgeInsets.only(left: 20, right: 20),
                     child: TextFormField(
                       decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
+                        border: OutlineInputBorder(),
                         hintText: 'Masukan Nama',
                         hintStyle: TextStyle(fontSize: 20),
                         prefixIcon: Icon(
@@ -78,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: TextFormField(
                       obscureText: true,
                       decoration: const InputDecoration(
-                          border: UnderlineInputBorder(),
+                          border: OutlineInputBorder(),
                           hintText: 'Masukan Password',
                           hintStyle: TextStyle(fontSize: 20),
                           prefixIcon: Icon(

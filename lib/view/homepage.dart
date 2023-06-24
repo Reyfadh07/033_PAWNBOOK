@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pawn_book/view/sidemenu.dart';
 import 'package:pawn_book/view/widget/header.dart';
 
 class HomePage extends StatelessWidget {

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:pawn_book/view/widget/header.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: header(context),
+    );
   }
 }

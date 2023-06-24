@@ -10,12 +10,10 @@ class SideMenu extends StatefulWidget {
 class _SideMenuState extends State<SideMenu> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
-          width: 260,
-          height: double.infinity,
-          color: Color.fromARGB(255, 207, 135, 109),
+    return Drawer(
+      child: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 233, 171, 148),
+        body: SafeArea(
           child: Column(
             children: [
               const ListTile(
@@ -44,6 +42,15 @@ class _SideMenuState extends State<SideMenu> {
                   child: Icon(Icons.book),
                 ),
                 title: Text("Daftar Buku"),
+              ),
+              ListTile(
+                onTap: () {},
+                leading: SizedBox(
+                  height: 34,
+                  width: 34,
+                  child: Icon(Icons.article_rounded),
+                ),
+                title: Text("Daily Report"),
               ),
             ],
           ),

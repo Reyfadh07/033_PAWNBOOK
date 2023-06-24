@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pawn_book/view/homepage.dart';
 
-import 'package:pawn_book/view/loginpage.dart';
-import 'package:pawn_book/view/registerpage.dart';
-import 'package:pawn_book/view/sidemenu.dart';
-import 'package:pawn_book/view/splash.dart';
-
 void main() {
   runApp(const MyApp());
 }
@@ -22,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: SideMenu(),
+      home: HomePage(),
     );
   }
 }

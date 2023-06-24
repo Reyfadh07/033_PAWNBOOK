@@ -8,7 +8,11 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: header(context),
+      drawer: SideMenu(),
+      appBar: AppBar(
+        title: Text('PawnBook'),
+      ),
+      body: SafeArea(child: Text('HomePage')),
     );
   }
 }

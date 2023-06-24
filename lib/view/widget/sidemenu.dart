@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pawn_book/view/daftarbuku.dart';
+import 'package:pawn_book/view/dailyreport.dart';
+import 'package:pawn_book/view/homepage.dart';
+import 'package:pawn_book/view/profile.dart';
 
 class SideMenu extends StatefulWidget {
   const SideMenu({super.key});
@@ -16,18 +20,25 @@ class _SideMenuState extends State<SideMenu> {
         body: SafeArea(
           child: Column(
             children: [
-              const ListTile(
-                leading: CircleAvatar(
+              ListTile(
+                onTap: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => Profile()));
+                },
+                leading: const CircleAvatar(
                   child: Icon(Icons.person),
                 ),
-                title: Text(
+                title: const Text(
                   "Admin",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
               ListTile(
-                onTap: () {},
-                leading: SizedBox(
+                onTap: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => HomePage()));
+                },
+                leading: const SizedBox(
                   height: 34,
                   width: 34,
                   child: Icon(Icons.list_alt_sharp),
@@ -35,22 +46,28 @@ class _SideMenuState extends State<SideMenu> {
                 title: Text("Daftar Peminjam"),
               ),
               ListTile(
-                onTap: () {},
-                leading: SizedBox(
+                onTap: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => DaftarBuku()));
+                },
+                leading: const SizedBox(
                   height: 34,
                   width: 34,
                   child: Icon(Icons.book),
                 ),
-                title: Text("Daftar Buku"),
+                title: const Text("Daftar Buku"),
               ),
               ListTile(
-                onTap: () {},
-                leading: SizedBox(
+                onTap: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => DailyReport()));
+                },
+                leading: const SizedBox(
                   height: 34,
                   width: 34,
                   child: Icon(Icons.article_rounded),
                 ),
-                title: Text("Daily Report"),
+                title: const Text("Daily Report"),
               ),
             ],
           ),

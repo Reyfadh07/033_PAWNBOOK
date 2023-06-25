@@ -89,7 +89,7 @@ class _AddPeminjamState extends State<AddPeminjam> {
                     "Pengarang :",
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                        color: Colors.blue,
+                        color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 15),
                   ),

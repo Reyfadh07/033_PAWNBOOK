@@ -12,6 +12,13 @@ class _AddPeminjamState extends State<AddPeminjam> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 209, 131, 102),
+        title: Text(
+          'Daftar Peminjam',
+          style: TextStyle(fontFamily: "ShortBaby"),
+        ),
+      ),
       backgroundColor: Colors.brown[100],
       body: SafeArea(
           child: SingleChildScrollView(
@@ -28,7 +35,7 @@ class _AddPeminjamState extends State<AddPeminjam> {
                     "Nama Peminjam :",
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                        color: Colors.blue,
+                        color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 15),
                   ),
@@ -55,7 +62,7 @@ class _AddPeminjamState extends State<AddPeminjam> {
                     "Judul Buku :",
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                        color: Colors.blue,
+                        color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 15),
                   ),
@@ -109,7 +116,7 @@ class _AddPeminjamState extends State<AddPeminjam> {
                     "Tanggal Meminjam :",
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                        color: Colors.blue,
+                        color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 15),
                   ),
@@ -124,7 +131,7 @@ class _AddPeminjamState extends State<AddPeminjam> {
                       hintStyle: TextStyle(fontSize: 20),
                       prefixIcon: Icon(
                         Icons.date_range,
-                        color: Colors.blue,
+                        color: Colors.black,
                       ),
                     ),
                     onSaved: (value) {
@@ -140,7 +147,7 @@ class _AddPeminjamState extends State<AddPeminjam> {
                     "Tanggal Pengembalian :",
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                        color: Colors.blue,
+                        color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 15),
                   ),

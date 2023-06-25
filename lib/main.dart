@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pawn_book/view/add_daftarbuku.dart';
 import 'package:pawn_book/view/add_daftarpeminjam.dart';
 import 'package:pawn_book/view/homepage.dart';
 import 'package:pawn_book/view/splash.dart';
@@ -17,10 +18,10 @@ class MyApp extends StatelessWidget {
       title: '',
       theme: ThemeData(
         colorScheme:
-            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 250, 178, 152)),
+            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 209, 131, 102)),
         useMaterial3: true,
       ),
-      home: AddPeminjam(),
+      home: AddBuku(),
     );
   }
 }

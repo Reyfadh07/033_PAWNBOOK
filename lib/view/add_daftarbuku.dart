@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pawn_book/controller/buku_controller.dart';
+import 'package:pawn_book/model/buku_model.dart';
+import 'package:pawn_book/view/daftarbuku.dart';
 
 class AddBuku extends StatefulWidget {
   const AddBuku({super.key});
@@ -10,7 +13,12 @@ class AddBuku extends StatefulWidget {
 class _AddBukuState extends State<AddBuku> {
   final _formKey = GlobalKey<FormState>();
 
+  var bukuController = BukuController();
+
   String? selectedValue;
+  String? judulbuku;
+  String? pengarangbuku;
+  String? penerbitbuku;
   List<String> status = ['Dipinjam', 'Tidak dipinjam'];
 
   List<DropdownMenuItem> generateItems(List<String> status) {
@@ -64,8 +72,8 @@ class _AddBukuState extends State<AddBuku> {
                       hintText: 'Masukan Judul Buku',
                       hintStyle: TextStyle(fontSize: 20),
                     ),
-                    onSaved: (value) {
-                      //name = value;
+                    onChanged: (value) {
+                      judulbuku = value;
                     },
                   ),
                 ),
@@ -91,8 +99,8 @@ class _AddBukuState extends State<AddBuku> {
                       hintText: 'Masukan Nama Pengarang',
                       hintStyle: TextStyle(fontSize: 20),
                     ),
-                    onSaved: (value) {
-                      //repassword = value;
+                    onChanged: (value) {
+                      pengarangbuku = value;
                     },
                   ),
                 ),
@@ -118,8 +126,8 @@ class _AddBukuState extends State<AddBuku> {
                       hintText: 'Masukan Nama Penerbit',
                       hintStyle: TextStyle(fontSize: 20),
                     ),
-                    onSaved: (value) {
-                      //repassword = value;
+                    onChanged: (value) {
+                      penerbitbuku = value;
                     },
                   ),
                 ),
@@ -153,7 +161,27 @@ class _AddBukuState extends State<AddBuku> {
                 Container(
                   padding: const EdgeInsets.only(top: 40),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        BukuModel bm = BukuModel(
+                          judulbuku: judulbuku!,
+                          pengarangbuku: pengarangbuku!,
+                          penerbitbuku: penerbitbuku!,
+                          selectedValue: selectedValue!,
+                        );
+
+                        bukuController.addBuku(bm);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Buku Added')));
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const DaftarBuku(),
+                          ),
+                        );
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(80),

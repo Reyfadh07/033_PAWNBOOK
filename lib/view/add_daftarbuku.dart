@@ -9,6 +9,21 @@ class AddBuku extends StatefulWidget {
 
 class _AddBukuState extends State<AddBuku> {
   final _formKey = GlobalKey<FormState>();
+
+  String? selectedValue;
+  List<String> status = ['Dipinjam', 'Tidak dipinjam'];
+
+  List<DropdownMenuItem> generateItems(List<String> status) {
+    List<DropdownMenuItem> items = [];
+    for (var item in status) {
+      items.add(DropdownMenuItem(
+        child: Text(item),
+        value: item,
+      ));
+    }
+    return items;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,19 +137,19 @@ class _AddBukuState extends State<AddBuku> {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.only(left: 10),
-                  margin: const EdgeInsets.only(right: 20),
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      hintText: 'Status Buku',
-                      hintStyle: TextStyle(fontSize: 20),
-                    ),
-                    onSaved: (value) {
-                      //repassword = value;
-                    },
-                  ),
-                ),
+                    alignment: Alignment.centerLeft,
+                    padding: const EdgeInsets.only(left: 10),
+                    margin: const EdgeInsets.only(right: 20),
+                    child: DropdownButton(
+                      dropdownColor: Color.fromARGB(255, 209, 131, 102),
+                      value: selectedValue,
+                      items: generateItems(status),
+                      onChanged: (item) {
+                        setState(() {
+                          selectedValue = item;
+                        });
+                      },
+                    )),
                 Container(
                   padding: const EdgeInsets.only(top: 40),
                   child: ElevatedButton(

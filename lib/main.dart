@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pawn_book/view/add_daftarbuku.dart';
 import 'package:pawn_book/view/add_daftarpeminjam.dart';
@@ -8,7 +9,9 @@ import 'package:pawn_book/view/edit_daftarpeminjam.dart';
 import 'package:pawn_book/view/homepage.dart';
 import 'package:pawn_book/view/splash.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 

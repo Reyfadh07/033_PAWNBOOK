@@ -1,7 +1,25 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
+import 'package:pawn_book/controller/buku_controller.dart';
+import 'package:pawn_book/model/buku_model.dart';
+import 'package:pawn_book/view/daftarbuku.dart';
+
 class EditBuku extends StatefulWidget {
-  const EditBuku({super.key});
+  EditBuku({
+    Key? key,
+    this.bukuid,
+    this.selectedValue,
+    this.judulbuku,
+    this.pengarangbuku,
+    this.penerbitbuku,
+  }) : super(key: key);
+
+  final String? bukuid;
+  final String? selectedValue;
+  final String? judulbuku;
+  final String? pengarangbuku;
+  final String? penerbitbuku;
 
   @override
   State<EditBuku> createState() => _EditBukuState();
@@ -9,6 +27,34 @@ class EditBuku extends StatefulWidget {
 
 class _EditBukuState extends State<EditBuku> {
   final _formKey = GlobalKey<FormState>();
+
+  var bukuController = BukuController();
+
+  String? eselectedValue;
+  String? ejudulbuku;
+  String? epengarangbuku;
+  String? epenerbitbuku;
+
+  List<String> status = ['Dipinjam', 'Tidak dipinjam'];
+
+  List<DropdownMenuItem> generateItems(List<String> status) {
+    List<DropdownMenuItem> items = [];
+    for (var item in status) {
+      items.add(DropdownMenuItem(
+        child: Text(item),
+        value: item,
+      ));
+    }
+    return items;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    eselectedValue = widget.selectedValue;
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -49,8 +95,9 @@ class _EditBukuState extends State<EditBuku> {
                       hintStyle: TextStyle(fontSize: 20),
                     ),
                     onSaved: (value) {
-                      //name = value;
+                      ejudulbuku = value;
                     },
+                    initialValue: widget.judulbuku,
                   ),
                 ),
                 Container(
@@ -76,8 +123,9 @@ class _EditBukuState extends State<EditBuku> {
                       hintStyle: TextStyle(fontSize: 20),
                     ),
                     onSaved: (value) {
-                      //repassword = value;
+                      epengarangbuku = value;
                     },
+                    initialValue: widget.pengarangbuku,
                   ),
                 ),
                 Container(
@@ -103,8 +151,9 @@ class _EditBukuState extends State<EditBuku> {
                       hintStyle: TextStyle(fontSize: 20),
                     ),
                     onSaved: (value) {
-                      //repassword = value;
+                      epenerbitbuku = value;
                     },
+                    initialValue: widget.penerbitbuku,
                   ),
                 ),
                 Container(
@@ -121,23 +170,44 @@ class _EditBukuState extends State<EditBuku> {
                   ),
                 ),
                 Container(
+                  alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.only(left: 10),
                   margin: const EdgeInsets.only(right: 20),
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      hintText: 'Status Buku',
-                      hintStyle: TextStyle(fontSize: 20),
-                    ),
-                    onSaved: (value) {
-                      //repassword = value;
+                  child: DropdownButton(
+                    dropdownColor: Color.fromARGB(255, 209, 131, 102),
+                    value: eselectedValue,
+                    items: generateItems(status),
+                    onChanged: (item) {
+                      setState(() {
+                        eselectedValue = item;
+                      });
                     },
                   ),
                 ),
                 Container(
                   padding: const EdgeInsets.only(top: 40),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                        BukuModel bm = BukuModel(
+                            bukuid: widget.bukuid,
+                            judulbuku: ejudulbuku!.toString(),
+                            pengarangbuku: epengarangbuku!.toString(),
+                            penerbitbuku: epenerbitbuku!.toString(),
+                            selectedValue: eselectedValue!.toString());
+                        bukuController.updateBuku(bm);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Buku diedit')));
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const DaftarBuku(),
+                          ),
+                        );
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(80),

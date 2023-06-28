@@ -28,16 +28,16 @@ class BukuController {
     await docRef.update(bukuModel.toMap());
   }
 
-  // Future<void> updateContact(BukuModel bkmodel) async {
-  //   final BukuModel bukuModel = BukuModel(
-  //       bukuid: docId,
-  //       judulbuku: bkmodel.judulbuku,
-  //       pengarangbuku: bkmodel.pengarangbuku,
-  //       penerbitbuku: bkmodel.penerbitbuku,
-  //       selectedValue: bkmodel.selectedValue);
+  Future<void> updateBuku(BukuModel bkmodel) async {
+    final BukuModel bukuModel = BukuModel(
+        bukuid: bkmodel.bukuid,
+        judulbuku: bkmodel.judulbuku,
+        pengarangbuku: bkmodel.pengarangbuku,
+        penerbitbuku: bkmodel.penerbitbuku,
+        selectedValue: bkmodel.selectedValue);
 
-  //   await contactcollection.doc(ctmodel.id).update(contactModel.toMap());
-  // }
+    await bukucollection.doc(bkmodel.bukuid).update(bukuModel.toMap());
+  }
 
   Future<void> removeBuku(String bukuid) async {
     await bukucollection.doc(bukuid).delete();

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pawn_book/controller/buku_controller.dart';
 import 'package:pawn_book/view/add_daftarbuku.dart';
+import 'package:pawn_book/view/edit_daftarbuku.dart';
 import 'package:pawn_book/view/widget/header.dart';
 import 'package:pawn_book/view/widget/sidemenu.dart';
 
@@ -52,17 +53,18 @@ class _DaftarBukuState extends State<DaftarBuku> {
                         padding: const EdgeInsets.all(5.0),
                         child: InkWell(
                           onLongPress: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => UpdateBuku(
-                            //         id: data[index]['id'],
-                            //         name: data[index]['name'],
-                            //         phone: data[index]['phone'],
-                            //         email: data[index]['email'],
-                            //         address: data[index]['address']),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditBuku(
+                                    bukuid: data[index]['bukuid'],
+                                    judulbuku: data[index]['judulbuku'],
+                                    pengarangbuku: data[index]['pengarangbuku'],
+                                    penerbitbuku: data[index]['penerbitbuku'],
+                                    selectedValue: data[index]
+                                        ['selectedValue']),
+                              ),
+                            );
                           },
                           child: Card(
                             elevation: 10,

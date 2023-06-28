@@ -39,9 +39,9 @@ class BukuController {
   //   await contactcollection.doc(ctmodel.id).update(contactModel.toMap());
   // }
 
-  // Future<void> removeContact(String id) async {
-  //   await contactcollection.doc(id).delete();
-  // }
+  Future<void> removeBuku(String bukuid) async {
+    await bukucollection.doc(bukuid).delete();
+  }
 
   Future getBuku() async {
     final contact = await bukucollection.get();

@@ -83,11 +83,11 @@ class _DaftarBukuState extends State<DaftarBuku> {
                               trailing: IconButton(
                                 icon: const Icon(Icons.delete),
                                 onPressed: () {
-                                  // cc.removeContact(
-                                  //     data[index]["id"].toString());
-                                  // setState(() {
-                                  //   cc.getContact();
-                                  // });
+                                  bc.removeBuku(
+                                      data[index]["bukuid"].toString());
+                                  setState(() {
+                                    bc.getBuku();
+                                  });
                                 },
                               ),
                             ),

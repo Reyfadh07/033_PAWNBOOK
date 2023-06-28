@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pawn_book/controller/buku_controller.dart';
@@ -52,20 +54,7 @@ class _DaftarBukuState extends State<DaftarBuku> {
                       return Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: InkWell(
-                          onLongPress: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EditBuku(
-                                    bukuid: data[index]['bukuid'],
-                                    judulbuku: data[index]['judulbuku'],
-                                    pengarangbuku: data[index]['pengarangbuku'],
-                                    penerbitbuku: data[index]['penerbitbuku'],
-                                    selectedValue: data[index]
-                                        ['selectedValue']),
-                              ),
-                            );
-                          },
+                          onLongPress: () {},
                           child: Card(
                             elevation: 10,
                             child: ListTile(
@@ -82,15 +71,39 @@ class _DaftarBukuState extends State<DaftarBuku> {
                               // ),
                               title: Text(data[index]["judulbuku"]),
                               subtitle: Text(data[index]["selectedValue"]),
-                              trailing: IconButton(
-                                icon: const Icon(Icons.delete),
-                                onPressed: () {
-                                  bc.removeBuku(
-                                      data[index]["bukuid"].toString());
-                                  setState(() {
-                                    bc.getBuku();
-                                  });
-                                },
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => EditBuku(
+                                                bukuid: data[index]['bukuid'],
+                                                judulbuku: data[index]
+                                                    ['judulbuku'],
+                                                pengarangbuku: data[index]
+                                                    ['pengarangbuku'],
+                                                penerbitbuku: data[index]
+                                                    ['penerbitbuku'],
+                                                selectedValue: data[index]
+                                                    ['selectedValue']),
+                                          ),
+                                        );
+                                      },
+                                      icon: Icon(Icons.mode_edit_outlined)),
+                                  IconButton(
+                                    icon: const Icon(Icons.delete),
+                                    onPressed: () {
+                                      bc.removeBuku(
+                                          data[index]["bukuid"].toString());
+                                      setState(() {
+                                        bc.getBuku();
+                                      });
+                                    },
+                                  ),
+                                ],
                               ),
                             ),
                           ),

@@ -19,12 +19,13 @@ class PeminjamController {
     final String docId = docRef.id;
 
     final PeminjamModel peminjamModel = PeminjamModel(
-        pid: docId,
-        namapeminjam: pjmodel.namapeminjam,
-        jbuku: pjmodel.jbuku,
-        pengarang: pjmodel.pengarang,
-        tglpinjam: pjmodel.tglpinjam,
-        tglkembali: pjmodel.tglkembali);
+      pid: docId,
+      namapeminjam: pjmodel.namapeminjam,
+      selectedBuku: pjmodel.selectedBuku,
+      pengarang: pjmodel.pengarang,
+      tglpinjam: pjmodel.tglpinjam,
+      tglkembali: pjmodel.tglkembali,
+    );
 
     await docRef.update(peminjamModel.toMap());
   }
@@ -33,7 +34,7 @@ class PeminjamController {
     final PeminjamModel peminjamModel = PeminjamModel(
         pid: pjmodel.pid,
         namapeminjam: pjmodel.namapeminjam,
-        jbuku: pjmodel.jbuku,
+        selectedBuku: pjmodel.selectedBuku,
         pengarang: pjmodel.pengarang,
         tglpinjam: pjmodel.tglpinjam,
         tglkembali: pjmodel.tglkembali);

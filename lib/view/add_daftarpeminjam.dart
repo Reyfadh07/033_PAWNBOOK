@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pawn_book/controller/peminjam_controller.dart';
@@ -15,15 +16,16 @@ class _AddPeminjamState extends State<AddPeminjam> {
   final _formKey = GlobalKey<FormState>();
 
   String? namapeminjam;
-  String? jbuku;
   String? pengarang;
   String? tglpinjam;
   String? tglkembali;
 
-  final TextEditingController datememinjam = TextEditingController();
-  final TextEditingController datepengembalian = TextEditingController();
+  String? selectedBuku;
 
   var peminjamcontroller = PeminjamController();
+
+  final TextEditingController datememinjam = TextEditingController();
+  final TextEditingController datepengembalian = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -84,16 +86,48 @@ class _AddPeminjamState extends State<AddPeminjam> {
                   ),
                 ),
                 Container(
+                  alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.only(left: 10),
                   margin: const EdgeInsets.only(right: 20),
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      hintText: 'Masukan Judul Buku',
-                      hintStyle: TextStyle(fontSize: 20),
-                    ),
-                    onChanged: (value) {
-                      jbuku = value;
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('buku')
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        List<DropdownMenuItem> judulbuku = [];
+                        for (int i = 0; i < snapshot.data!.docs.length; i++) {
+                          DocumentSnapshot snap = snapshot.data!.docs[i];
+                          Map<String, dynamic> data =
+                              snap.data() as Map<String, dynamic>;
+                          String? judul = data['judulbuku'] as String?;
+                          judulbuku.add(
+                            DropdownMenuItem(
+                              child: Text(judul!),
+                              value: snap.id,
+                            ),
+                          );
+                        }
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            //Icon(Icons.arrow_drop_down),
+                            DropdownButton(
+                              items: judulbuku,
+                              onChanged: (value) {
+                                setState(() {
+                                  selectedBuku = value;
+                                });
+                              },
+                              value: selectedBuku,
+                            )
+                          ],
+                        );
+                      }
                     },
                   ),
                 ),
@@ -207,13 +241,13 @@ class _AddPeminjamState extends State<AddPeminjam> {
                       if (_formKey.currentState!.validate()) {
                         PeminjamModel pjm = PeminjamModel(
                           namapeminjam: namapeminjam!,
-                          jbuku: jbuku!,
+                          selectedBuku: selectedBuku!,
                           pengarang: pengarang!,
                           tglpinjam: tglpinjam!,
                           tglkembali: tglkembali!,
                         );
 
-                      peminjamcontroller.addPeminjam(pjm);
+                        peminjamcontroller.addPeminjam(pjm);
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 content: Text('Data Peminjam Ditambahkan')));

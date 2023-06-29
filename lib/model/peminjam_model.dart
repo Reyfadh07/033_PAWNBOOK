@@ -4,14 +4,14 @@ import 'dart:convert';
 class PeminjamModel {
   String? pid;
   final String namapeminjam;
-  final String jbuku;
+  final String selectedBuku;
   final String pengarang;
   final String tglpinjam;
   final String tglkembali;
   PeminjamModel({
     this.pid,
     required this.namapeminjam,
-    required this.jbuku,
+    required this.selectedBuku,
     required this.pengarang,
     required this.tglpinjam,
     required this.tglkembali,
@@ -21,7 +21,7 @@ class PeminjamModel {
     return <String, dynamic>{
       'pid': pid,
       'namapeminjam': namapeminjam,
-      'jbuku': jbuku,
+      'selectedBuku': selectedBuku,
       'pengarang': pengarang,
       'tglpinjam': tglpinjam,
       'tglkembali': tglkembali,
@@ -32,7 +32,7 @@ class PeminjamModel {
     return PeminjamModel(
       pid: map['pid'] != null ? map['pid'] as String : null,
       namapeminjam: map['namapeminjam'] as String,
-      jbuku: map['jbuku'] as String,
+      selectedBuku: map['selectedBuku'] as String,
       pengarang: map['pengarang'] as String,
       tglpinjam: map['tglpinjam'] as String,
       tglkembali: map['tglkembali'] as String,

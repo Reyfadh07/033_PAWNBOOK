@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pawn_book/controller/auth_controller.dart';
+import 'package:pawn_book/model/user_model.dart';
 import 'package:pawn_book/view/Homepage.dart';
 
 import 'loginpage.dart';
@@ -13,6 +15,13 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   final _passwordController = TextEditingController();
+
+  var authcontroller = AuthController();
+
+  String? email;
+  String? password;
+  String? name;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,6 +91,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Container(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: TextFormField(
+                    controller: _passwordController,
                     decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
                       hintStyle: TextStyle(fontSize: 20),
@@ -91,6 +101,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         color: Colors.redAccent,
                       ),
                     ),
+                    onChanged: (value) {
+                      name = value;
+                    },
                   ),
                 ),
                 Container(
@@ -117,6 +130,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         color: Colors.redAccent,
                       ),
                     ),
+                    onChanged: (value) {
+                      email = value;
+                    },
                   ),
                 ),
                 Container(
@@ -144,20 +160,66 @@ class _RegisterPageState extends State<RegisterPage> {
                         color: Colors.redAccent,
                       ),
                     ),
+                    onChanged: (value) {
+                      password = value;
+                    },
                   ),
                 ),
                 Container(
                   padding: const EdgeInsets.only(top: 35),
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        _formKey.currentState!.save();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HomePage(),
-                          ),
-                        );
+                        UserModel? registeredUser =
+                            await authcontroller.registerWithEmailAndPassword(
+                                email!, password!, name!);
+
+                        if (registeredUser != null) {
+                          // Registration successful
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('Registration Successful'),
+                                content: const Text(
+                                    'You have been successfully registered.'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () {
+                                      print(registeredUser.name);
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return LoginPage();
+                                      }));
+                                      // Navigate to the next screen or perform any desired action
+                                    },
+                                    child: const Text('OK'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        } else {
+                          // Registration failed
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('Registration Failed'),
+                                content: const Text(
+                                    'An error occurred during registration.'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('OK'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
                       }
                     },
                     style: ElevatedButton.styleFrom(

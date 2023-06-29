@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pawn_book/controller/auth_controller.dart';
+import 'package:pawn_book/model/user_model.dart';
+import 'package:pawn_book/view/homepage.dart';
 import 'package:pawn_book/view/registerpage.dart';
 
 class LoginPage extends StatefulWidget {
@@ -10,6 +13,11 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+
+  var authcontroller = AuthController();
+
+  String? email;
+  String? password;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                     padding: const EdgeInsets.only(top: 30, left: 30),
                     alignment: Alignment.topLeft,
                     child: const Text(
-                      "Nama",
+                      "Email",
                       textAlign: TextAlign.left,
                       style: TextStyle(
                           color: Colors.redAccent, fontWeight: FontWeight.bold),
@@ -55,13 +63,16 @@ class _LoginPageState extends State<LoginPage> {
                     child: TextFormField(
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        hintText: 'Masukan Nama',
+                        hintText: 'Masukan Email',
                         hintStyle: TextStyle(fontSize: 20),
                         prefixIcon: Icon(
                           Icons.person_2,
                           color: Colors.redAccent,
                         ),
                       ),
+                      onChanged: (value) {
+                        email = value;
+                      },
                     ),
                   ),
                   Container(
@@ -87,12 +98,68 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.redAccent,
                           ),
                           suffixIcon: Icon(Icons.remove_red_eye)),
+                      onChanged: (value) {
+                        password = value;
+                      },
                     ),
                   ),
                   Container(
                     padding: const EdgeInsets.only(top: 50),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          UserModel? registeredUser = await authcontroller
+                              .signInWithEmailAndPassword(email!, password!);
+
+                          if (registeredUser != null) {
+                            // Registration successful
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Login Successful'),
+                                  content: const Text(
+                                      'You have been successfully login.'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        print(registeredUser.name);
+                                        Navigator.pushReplacement(context,
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                          return HomePage();
+                                        }));
+                                        //Navigate to the next screen or perform any desired action
+                                      },
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          } else {
+                            // Registration failed
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Login Failed'),
+                                  content: const Text(
+                                      'An error occurred during login.'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50),

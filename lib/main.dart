@@ -7,6 +7,7 @@ import 'package:pawn_book/view/detail_daftarpeminjam.dart';
 import 'package:pawn_book/view/edit_daftarbuku.dart';
 import 'package:pawn_book/view/edit_daftarpeminjam.dart';
 import 'package:pawn_book/view/homepage.dart';
+import 'package:pawn_book/view/loginpage.dart';
 import 'package:pawn_book/view/splash.dart';
 
 Future main() async {
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
             ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 209, 131, 102)),
         useMaterial3: true,
       ),
-      home: HomePage(),
+      home: LoginPage(),
     );
   }
 }

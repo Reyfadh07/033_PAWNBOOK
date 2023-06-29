@@ -34,7 +34,7 @@ class _DaftarBukuState extends State<DaftarBuku> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
-              "Buku list",
+              "Daftar Buku",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Expanded(

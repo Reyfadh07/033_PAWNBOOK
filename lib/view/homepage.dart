@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pawn_book/view/add_daftarbuku.dart';
+import 'package:pawn_book/view/add_daftarpeminjam.dart';
 import 'package:pawn_book/view/widget/header.dart';
 import 'package:pawn_book/view/widget/sidemenu.dart';
 
@@ -11,6 +13,17 @@ class HomePage extends StatelessWidget {
       drawer: SideMenu(),
       appBar: header(context),
       body: SafeArea(child: Text('HomePage')),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddPeminjam(),
+            ),
+          );
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

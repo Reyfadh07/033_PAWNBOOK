@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:pawn_book/controller/peminjam_controller.dart';
+import 'package:pawn_book/model/peminjam_model.dart';
+import 'package:pawn_book/view/homepage.dart';
 
 class AddPeminjam extends StatefulWidget {
   const AddPeminjam({super.key});
@@ -9,6 +13,18 @@ class AddPeminjam extends StatefulWidget {
 
 class _AddPeminjamState extends State<AddPeminjam> {
   final _formKey = GlobalKey<FormState>();
+
+  String? namapeminjam;
+  String? jbuku;
+  String? pengarang;
+  String? tglpinjam;
+  String? tglkembali;
+
+  final TextEditingController datememinjam = TextEditingController();
+  final TextEditingController datepengembalian = TextEditingController();
+
+  var peminjamcontroller = PeminjamController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,8 +65,8 @@ class _AddPeminjamState extends State<AddPeminjam> {
                       hintText: 'Masukan Nama Peminjam',
                       hintStyle: TextStyle(fontSize: 20),
                     ),
-                    onSaved: (value) {
-                      //name = value;
+                    onChanged: (value) {
+                      namapeminjam = value;
                     },
                   ),
                 ),
@@ -76,8 +92,8 @@ class _AddPeminjamState extends State<AddPeminjam> {
                       hintText: 'Masukan Judul Buku',
                       hintStyle: TextStyle(fontSize: 20),
                     ),
-                    onSaved: (value) {
-                      //repassword = value;
+                    onChanged: (value) {
+                      jbuku = value;
                     },
                   ),
                 ),
@@ -103,8 +119,8 @@ class _AddPeminjamState extends State<AddPeminjam> {
                       hintText: 'Masukan Nama Pengarang',
                       hintStyle: TextStyle(fontSize: 20),
                     ),
-                    onSaved: (value) {
-                      //repassword = value;
+                    onChanged: (value) {
+                      pengarang = value;
                     },
                   ),
                 ),
@@ -125,17 +141,24 @@ class _AddPeminjamState extends State<AddPeminjam> {
                   padding: const EdgeInsets.only(left: 10),
                   margin: const EdgeInsets.only(right: 20),
                   child: TextFormField(
+                    controller: datememinjam,
                     decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      hintText: 'Masukan Tanggal Meminjam',
-                      hintStyle: TextStyle(fontSize: 20),
-                      prefixIcon: Icon(
-                        Icons.date_range,
-                        color: Colors.black,
-                      ),
-                    ),
-                    onSaved: (value) {
-                      //email = value;
+                        hintText: "Pilih Tanggal Meminjam",
+                        prefixIcon: Icon(Icons.date_range_outlined),
+                        border: UnderlineInputBorder()),
+                    readOnly: true,
+                    onTap: () async {
+                      DateTime? picked = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2100),
+                      );
+                      tglpinjam = DateFormat('dd-MM-yyyy').format(picked!);
+
+                      setState(() {
+                        datememinjam.text = tglpinjam!;
+                      });
                     },
                   ),
                 ),
@@ -156,24 +179,53 @@ class _AddPeminjamState extends State<AddPeminjam> {
                   padding: const EdgeInsets.only(left: 10),
                   margin: const EdgeInsets.only(right: 20),
                   child: TextFormField(
+                    controller: datepengembalian,
                     decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      hintText: 'Masukan Tanggal Pengembalian',
-                      hintStyle: TextStyle(fontSize: 20),
-                      prefixIcon: Icon(
-                        Icons.date_range_outlined,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    onSaved: (value) {
-                      //password = value;
+                        hintText: "Pilih Tanggal Pemngembalian",
+                        prefixIcon: Icon(Icons.date_range_outlined),
+                        border: UnderlineInputBorder()),
+                    readOnly: true,
+                    onTap: () async {
+                      DateTime? picked = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2100),
+                      );
+                      tglkembali = DateFormat('dd-MM-yyyy').format(picked!);
+
+                      setState(() {
+                        datepengembalian.text = tglkembali!;
+                      });
                     },
                   ),
                 ),
                 Container(
                   padding: const EdgeInsets.only(top: 40),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        PeminjamModel pjm = PeminjamModel(
+                          namapeminjam: namapeminjam!,
+                          jbuku: jbuku!,
+                          pengarang: pengarang!,
+                          tglpinjam: tglpinjam!,
+                          tglkembali: tglkembali!,
+                        );
+
+                      peminjamcontroller.addPeminjam(pjm);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Data Peminjam Ditambahkan')));
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          ),
+                        );
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(80),

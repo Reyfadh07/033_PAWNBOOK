@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pawn_book/controller/peminjam_controller.dart';
 import 'package:pawn_book/view/add_daftarbuku.dart';
 import 'package:pawn_book/view/add_daftarpeminjam.dart';
+import 'package:pawn_book/view/edit_daftarpeminjam.dart';
 import 'package:pawn_book/view/widget/header.dart';
 import 'package:pawn_book/view/widget/sidemenu.dart';
 
@@ -50,30 +51,30 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.all(5.0),
                         child: InkWell(
                           onTap: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => DetailIb(
-                            //       pregid: datapreg[index]['pregid'],
-                            //       usiajanin: datapreg[index]['usiajanin'],
-                            //       formatDate:
-                            //           datapreg[index]['formatDate'].toString(),
-                            //       bbpreg: datapreg[index]['bbpreg'],
-                            //       selectedvalue: datapreg[index]
-                            //           ['selectedvalue'],
-                            //       keluhan: datapreg[index]['keluhan'],
-                            //       tindakan: datapreg[index]['tindakan'],
-                            //     ),
-                            //   ),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditPeminjam(
+                                  pid: datapinjam[index]['pid'],
+                                  namapeminjam: datapinjam[index]
+                                      ['namapeminjam'],
+                                  selectedBuku: datapinjam[index]
+                                          ['selectedBuku']
+                                      .toString(),
+                                  pengarang: datapinjam[index]['pengarang'],
+                                  tglpinjam: datapinjam[index]['tglpinjam'],
+                                  tglkembali: datapinjam[index]['tglkembali'],
+                                ),
+                              ),
+                            );
                           },
                           child: Card(
                             elevation: 10,
                             child: ListTile(
                               title: Text(datapinjam[index]['namapeminjam']),
                               leading: const Icon(Icons.book),
-                              subtitle:
-                                  Text(datapinjam[index]['jbuku'].toString()),
+                              subtitle: Text(
+                                  datapinjam[index]['selectedBuku'].toString()),
                               trailing: IconButton(
                                 icon: const Icon(Icons.delete),
                                 onPressed: () {

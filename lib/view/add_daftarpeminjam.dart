@@ -33,7 +33,7 @@ class _AddPeminjamState extends State<AddPeminjam> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 209, 131, 102),
         title: Text(
-          'Daftar Peminjam',
+          'Tambah Data Daftar Peminjam',
           style: TextStyle(fontFamily: "ShortBaby"),
         ),
       ),
@@ -105,10 +105,11 @@ class _AddPeminjamState extends State<AddPeminjam> {
                           Map<String, dynamic> data =
                               snap.data() as Map<String, dynamic>;
                           String? judul = data['judulbuku'] as String?;
+                          //var value = snap.id;
                           judulbuku.add(
                             DropdownMenuItem(
                               child: Text(judul!),
-                              value: snap.id,
+                              value: judul,
                             ),
                           );
                         }
@@ -188,11 +189,14 @@ class _AddPeminjamState extends State<AddPeminjam> {
                         firstDate: DateTime.now(),
                         lastDate: DateTime(2100),
                       );
-                      tglpinjam = DateFormat('dd-MM-yyyy').format(picked!);
 
-                      setState(() {
-                        datememinjam.text = tglpinjam!;
-                      });
+                      if (picked != null) {
+                        tglpinjam = DateFormat('dd-MM-yyyy').format(picked);
+
+                        setState(() {
+                          datememinjam.text = tglpinjam.toString();
+                        });
+                      }
                     },
                   ),
                 ),
@@ -226,11 +230,14 @@ class _AddPeminjamState extends State<AddPeminjam> {
                         firstDate: DateTime.now(),
                         lastDate: DateTime(2100),
                       );
-                      tglkembali = DateFormat('dd-MM-yyyy').format(picked!);
 
-                      setState(() {
-                        datepengembalian.text = tglkembali!;
-                      });
+                      if (picked != null) {
+                        tglkembali = DateFormat('dd-MM-yyyy').format(picked);
+
+                        setState(() {
+                          datepengembalian.text = tglkembali.toString();
+                        });
+                      }
                     },
                   ),
                 ),
@@ -243,8 +250,8 @@ class _AddPeminjamState extends State<AddPeminjam> {
                           namapeminjam: namapeminjam!,
                           selectedBuku: selectedBuku!,
                           pengarang: pengarang!,
-                          tglpinjam: tglpinjam!,
-                          tglkembali: tglkembali!,
+                          tglpinjam: datememinjam.text,
+                          tglkembali: datepengembalian.text,
                         );
 
                         peminjamcontroller.addPeminjam(pjm);

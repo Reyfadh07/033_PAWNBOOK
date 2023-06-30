@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                                 return AlertDialog(
                                   title: const Text('Login Successful'),
                                   content: const Text(
-                                      'You have been successfully login.'),
+                                      'Anda Berhasil Login.'),
                                   actions: <Widget>[
                                     TextButton(
                                       onPressed: () {
@@ -145,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                                 return AlertDialog(
                                   title: const Text('Login Failed'),
                                   content: const Text(
-                                      'An error occurred during login.'),
+                                      'Terjadi kesalahan saat login.'),
                                   actions: <Widget>[
                                     TextButton(
                                       onPressed: () {

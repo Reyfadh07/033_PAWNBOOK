@@ -25,6 +25,7 @@ class _DaftarBukuState extends State<DaftarBuku> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.brown[100],
       drawer: SideMenu(),
       appBar: header(context),
       body: SafeArea(
@@ -56,17 +57,6 @@ class _DaftarBukuState extends State<DaftarBuku> {
                           child: Card(
                             elevation: 10,
                             child: ListTile(
-                              // leading: CircleAvatar(
-                              //   backgroundColor: Colors.red,
-                              //   child: Text(
-                              //     data[index]["name"]
-                              //         .substring(0, 1)
-                              //         .toUpperCase(),
-                              //     style: const TextStyle(
-                              //         color: Colors.white,
-                              //         fontWeight: FontWeight.bold),
-                              //   ),
-                              // ),
                               title: Text(data[index]["judulbuku"]),
                               subtitle: Text(data[index]["selectedValue"]),
                               trailing: Row(

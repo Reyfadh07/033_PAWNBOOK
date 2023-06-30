@@ -35,6 +35,8 @@ class _EditPeminjamState extends State<EditPeminjam> {
   String? etglpinjam;
   String? etglkembali;
 
+  Map<String, dynamic> pengarangBuku = {};
+
   var peminjamcontroller = PeminjamController();
 
   final TextEditingController newdatememinjam = TextEditingController();
@@ -46,6 +48,7 @@ class _EditPeminjamState extends State<EditPeminjam> {
   void initState() {
     // TODO: implement initState
     eselectedBuku = widget.selectedBuku;
+    epengarang = widget.pengarang;
     newdatememinjam.text = widget.tglpinjam ?? '';
     newdatepengembalian.text = widget.tglkembali ?? '';
     super.initState();
@@ -136,8 +139,9 @@ class _EditPeminjamState extends State<EditPeminjam> {
                               value: judul,
                             ),
                           );
+                          pengarangBuku[judul] = data['pengarangbuku'];
                         }
-                        return Row(
+                        return Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             //Icon(Icons.arrow_drop_down),
@@ -146,44 +150,61 @@ class _EditPeminjamState extends State<EditPeminjam> {
                               onChanged: (value) {
                                 setState(() {
                                   eselectedBuku = value;
+                                  epengarang = pengarangBuku[value];
                                 });
                               },
                               value: eselectedBuku,
-                            )
+                            ),
+                            const Text(
+                              "Pengarang :",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                            Text(
+                              epengarang ?? '', // Tambahkan widget Text ini
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 15,
+                              ),
+                            ),
                           ],
                         );
                       }
                     },
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  padding: const EdgeInsets.only(left: 20),
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    "Pengarang :",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.only(left: 10),
-                  margin: const EdgeInsets.only(right: 20),
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      hintText: 'Masukan Nama Pengarang',
-                      hintStyle: TextStyle(fontSize: 20),
-                    ),
-                    onSaved: (value) {
-                      epengarang = value;
-                    },
-                    initialValue: widget.pengarang,
-                  ),
-                ),
+                // Container(
+                //   margin: const EdgeInsets.only(top: 20),
+                //   padding: const EdgeInsets.only(left: 20),
+                //   alignment: Alignment.centerLeft,
+                //   child: const Text(
+                //     "Pengarang :",
+                //     textAlign: TextAlign.left,
+                //     style: TextStyle(
+                //         color: Colors.black,
+                //         fontWeight: FontWeight.bold,
+                //         fontSize: 15),
+                //   ),
+                // ),
+                // Container(
+                //   padding: const EdgeInsets.only(left: 10),
+                //   margin: const EdgeInsets.only(right: 20),
+                //   child: TextFormField(
+                //     decoration: const InputDecoration(
+                //       border: UnderlineInputBorder(),
+                //       hintText: 'Masukan Nama Pengarang',
+                //       hintStyle: TextStyle(fontSize: 20),
+                //     ),
+                //     onSaved: (value) {
+                //       epengarang = value;
+                //     },
+                //     initialValue: widget.pengarang,
+                //   ),
+                // ),
                 Container(
                   margin: const EdgeInsets.only(top: 20),
                   padding: const EdgeInsets.only(left: 20),

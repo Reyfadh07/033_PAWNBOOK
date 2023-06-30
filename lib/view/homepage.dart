@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.brown[100],
       drawer: SideMenu(),
       appBar: header(context),
       body: SafeArea(
@@ -50,23 +51,23 @@ class _HomePageState extends State<HomePage> {
                       return Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EditPeminjam(
-                                  pid: datapinjam[index]['pid'],
-                                  namapeminjam: datapinjam[index]
-                                      ['namapeminjam'],
-                                  selectedBuku: datapinjam[index]
-                                          ['selectedBuku']
-                                      .toString(),
-                                  pengarang: datapinjam[index]['pengarang'],
-                                  tglpinjam: datapinjam[index]['tglpinjam'],
-                                  tglkembali: datapinjam[index]['tglkembali'],
-                                ),
-                              ),
-                            );
+                          onLongPress: () {
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => EditPeminjam(
+                            //       pid: datapinjam[index]['pid'],
+                            //       namapeminjam: datapinjam[index]
+                            //           ['namapeminjam'],
+                            //       selectedBuku: datapinjam[index]
+                            //               ['selectedBuku']
+                            //           .toString(),
+                            //       pengarang: datapinjam[index]['pengarang'],
+                            //       tglpinjam: datapinjam[index]['tglpinjam'],
+                            //       tglkembali: datapinjam[index]['tglkembali'],
+                            //     ),
+                            //   ),
+                            // );
                           },
                           child: Card(
                             elevation: 10,
@@ -75,20 +76,48 @@ class _HomePageState extends State<HomePage> {
                               leading: const Icon(Icons.book),
                               subtitle: Text(
                                   datapinjam[index]['selectedBuku'].toString()),
-                              trailing: IconButton(
-                                icon: const Icon(Icons.delete),
-                                onPressed: () {
-                                  peminjamcontroller.removePeminjam(
-                                      datapinjam[index]['pid'].toString());
-                                  setState(() {
-                                    peminjamcontroller.getPinjam();
-                                  });
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => EditPeminjam(
+                                              pid: datapinjam[index]['pid'],
+                                              namapeminjam: datapinjam[index]
+                                                  ['namapeminjam'],
+                                              selectedBuku: datapinjam[index]
+                                                      ['selectedBuku']
+                                                  .toString(),
+                                              pengarang: datapinjam[index]
+                                                  ['pengarang'],
+                                              tglpinjam: datapinjam[index]
+                                                  ['tglpinjam'],
+                                              tglkembali: datapinjam[index]
+                                                  ['tglkembali'],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      icon: Icon(Icons.mode_edit_outlined)),
+                                  IconButton(
+                                    icon: const Icon(Icons.delete),
+                                    onPressed: () {
+                                      peminjamcontroller.removePeminjam(
+                                          datapinjam[index]['pid'].toString());
+                                      setState(() {
+                                        peminjamcontroller.getPinjam();
+                                      });
 
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content:
-                                              Text('Data Peminjam Dihapus')));
-                                },
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                              content: Text(
+                                                  'Data Peminjam Dihapus')));
+                                    },
+                                  ),
+                                ],
                               ),
                             ),
                           ),

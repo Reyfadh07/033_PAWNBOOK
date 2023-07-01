@@ -64,8 +64,10 @@ class _SideMenuState extends State<SideMenu> {
               ),
               ListTile(
                 onTap: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => DailyReport()));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DailyReportPage()));
                 },
                 leading: const SizedBox(
                   height: 34,

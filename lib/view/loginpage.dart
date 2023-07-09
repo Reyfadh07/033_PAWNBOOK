@@ -16,6 +16,8 @@ class _LoginPageState extends State<LoginPage> {
 
   var authcontroller = AuthController();
 
+  bool visiblePassword = true;
+
   String? email;
   String? password;
 
@@ -88,16 +90,30 @@ class _LoginPageState extends State<LoginPage> {
                   Container(
                     padding: const EdgeInsets.only(left: 20, right: 20),
                     child: TextFormField(
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: 'Masukan Password',
-                          hintStyle: TextStyle(fontSize: 20),
-                          prefixIcon: Icon(
-                            Icons.lock,
+                      obscureText: !visiblePassword,
+                      keyboardType: TextInputType.visiblePassword,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Masukan Password',
+                        hintStyle: const TextStyle(fontSize: 20),
+                        prefixIcon: const Icon(
+                          Icons.lock,
+                          color: Colors.redAccent,
+                        ),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              visiblePassword = !visiblePassword;
+                            });
+                          },
+                          icon: Icon(
+                            visiblePassword
+                                ? Icons.visibility
+                                : Icons.visibility_off,
                             color: Colors.redAccent,
                           ),
-                          suffixIcon: Icon(Icons.remove_red_eye)),
+                        ),
+                      ),
                       onChanged: (value) {
                         password = value;
                       },
@@ -118,8 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                               builder: (BuildContext context) {
                                 return AlertDialog(
                                   title: const Text('Login Successful'),
-                                  content: const Text(
-                                      'Anda Berhasil Login.'),
+                                  content: const Text('Anda Berhasil Login.'),
                                   actions: <Widget>[
                                     TextButton(
                                       onPressed: () {

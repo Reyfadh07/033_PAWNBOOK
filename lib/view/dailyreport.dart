@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:pawn_book/view/widget/header.dart';
+import 'package:pawn_book/view/widget/sidemenu.dart';
 
 class DailyReportPage extends StatefulWidget {
   const DailyReportPage({Key? key}) : super(key: key);
@@ -37,6 +39,8 @@ class _DailyReportPageState extends State<DailyReportPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: header(context),
+      drawer: SideMenu(),
       appBar: AppBar(
         title: Text('Daily Report'),
         actions: [

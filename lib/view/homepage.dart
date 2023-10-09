@@ -51,24 +51,7 @@ class _HomePageState extends State<HomePage> {
                       return Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: InkWell(
-                          onLongPress: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => EditPeminjam(
-                            //       pid: datapinjam[index]['pid'],
-                            //       namapeminjam: datapinjam[index]
-                            //           ['namapeminjam'],
-                            //       selectedBuku: datapinjam[index]
-                            //               ['selectedBuku']
-                            //           .toString(),
-                            //       pengarang: datapinjam[index]['pengarang'],
-                            //       tglpinjam: datapinjam[index]['tglpinjam'],
-                            //       tglkembali: datapinjam[index]['tglkembali'],
-                            //     ),
-                            //   ),
-                            // );
-                          },
+                          onLongPress: () {},
                           child: Card(
                             elevation: 10,
                             child: ListTile(

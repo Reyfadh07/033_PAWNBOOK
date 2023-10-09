@@ -152,33 +152,7 @@ class _AddPeminjamState extends State<AddPeminjam> {
                       },
                     ),
                   ),
-                  // Container(
-                  //   margin: const EdgeInsets.only(top: 20),
-                  //   padding: const EdgeInsets.only(left: 20),
-                  //   alignment: Alignment.centerLeft,
-                  //   child: const Text(
-                  //     "Pengarang :",
-                  //     textAlign: TextAlign.left,
-                  //     style: TextStyle(
-                  //         color: Colors.black,
-                  //         fontWeight: FontWeight.bold,
-                  //         fontSize: 15),
-                  //   ),
-                  // ),
-                  // Container(
-                  //   padding: const EdgeInsets.only(left: 10),
-                  //   margin: const EdgeInsets.only(right: 20),
-                  //   child: TextFormField(
-                  //     decoration: const InputDecoration(
-                  //       border: UnderlineInputBorder(),
-                  //       hintText: 'Masukan Nama Pengarang',
-                  //       hintStyle: TextStyle(fontSize: 20),
-                  //     ),
-                  //     onChanged: (value) {
-                  //       pengarang = value;
-                  //     },
-                  //   ),
-                  // ),
+                
                   Container(
                     margin: const EdgeInsets.only(top: 20),
                     padding: const EdgeInsets.only(left: 20),

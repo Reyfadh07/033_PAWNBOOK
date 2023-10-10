@@ -1,13 +1,14 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+/// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class PeminjamModel {
-  String? pid;
-  final String namapeminjam;
-  final String selectedBuku;
-  final String pengarang;
-  final String tglpinjam;
-  final String tglkembali;
+  String? pid; /// ID peminjam (Opsional)
+  final String namapeminjam; /// Nama peminjam (Wajib)
+  final String selectedBuku; /// Judul buku yang dipinjam (Wajib)
+  final String pengarang; /// Nama pengarang buku (Wajib)
+  final String tglpinjam; /// Tanggal peminjaman (Wajib)
+  final String tglkembali; /// Tanggal pengembalian (Wajib)
+
   PeminjamModel({
     this.pid,
     required this.namapeminjam,
@@ -17,6 +18,7 @@ class PeminjamModel {
     required this.tglkembali,
   });
 
+  /// Mengonversi objek PeminjamModel ke Map
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'pid': pid,
@@ -28,6 +30,7 @@ class PeminjamModel {
     };
   }
 
+  /// Membuat objek PeminjamModel dari Map
   factory PeminjamModel.fromMap(Map<String, dynamic> map) {
     return PeminjamModel(
       pid: map['pid'] != null ? map['pid'] as String : null,
@@ -39,8 +42,10 @@ class PeminjamModel {
     );
   }
 
+  /// Mengonversi objek PeminjamModel menjadi JSON
   String toJson() => json.encode(toMap());
 
+  /// Membuat objek PeminjamModel dari JSON
   factory PeminjamModel.fromJson(String source) =>
       PeminjamModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

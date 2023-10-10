@@ -17,6 +17,7 @@ class _SideMenuState extends State<SideMenu> {
   var authctrl = AuthController();
 
   bool isLoggedOut = false;
+  
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -25,6 +26,7 @@ class _SideMenuState extends State<SideMenu> {
         body: SafeArea(
           child: Column(
             children: [
+              /// ListTile untuk navigasi ke halaman profil
               ListTile(
                 onTap: () {
                   Navigator.pushReplacement(context,
@@ -38,6 +40,7 @@ class _SideMenuState extends State<SideMenu> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
+              /// ListTile untuk navigasi ke halaman daftar peminjam
               ListTile(
                 onTap: () {
                   Navigator.pushReplacement(context,
@@ -50,6 +53,7 @@ class _SideMenuState extends State<SideMenu> {
                 ),
                 title: Text("Daftar Peminjam"),
               ),
+              /// ListTile untuk navigasi ke halaman daftar buku
               ListTile(
                 onTap: () {
                   Navigator.pushReplacement(context,
@@ -62,6 +66,7 @@ class _SideMenuState extends State<SideMenu> {
                 ),
                 title: const Text("Daftar Buku"),
               ),
+              /// ListTile untuk navigasi ke halaman laporan harian
               ListTile(
                 onTap: () {
                   Navigator.pushReplacement(
@@ -76,6 +81,7 @@ class _SideMenuState extends State<SideMenu> {
                 ),
                 title: const Text("Daily Report"),
               ),
+              /// ListTile untuk logout
               ListTile(
                 onTap: () {
                   showDialog(

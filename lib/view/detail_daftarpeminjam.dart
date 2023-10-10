@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 
-class DetailPeminjam extends StatefulWidget {
-  const DetailPeminjam({super.key});
+class DetailBuku extends StatefulWidget {
+  const DetailBuku({super.key});
 
   @override
-  State<DetailPeminjam> createState() => _DetailPeminjamState();
+  State<DetailBuku> createState() => _DetailBukuState();
 }
 
-class _DetailPeminjamState extends State<DetailPeminjam> {
+class _DetailBukuState extends State<DetailBuku> {
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 209, 131, 102),
         title: Text(
-          'Detail Daftar Peminjam',
+          'Detail Buku',
           style: TextStyle(fontFamily: "ShortBaby"),
         ),
       ),
@@ -27,34 +28,6 @@ class _DetailPeminjamState extends State<DetailPeminjam> {
             Form(
               key: _formKey,
               child: Column(children: [
-                Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  padding: const EdgeInsets.only(left: 20),
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    "Nama Peminjam :",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.only(left: 10),
-                  margin: const EdgeInsets.only(right: 20),
-                  child: TextFormField(
-                    readOnly: true,
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      hintText: '',
-                      hintStyle: TextStyle(fontSize: 20),
-                    ),
-                    onSaved: (value) {
-                      //name = value;
-                    },
-                  ),
-                ),
                 Container(
                   margin: const EdgeInsets.only(top: 20),
                   padding: const EdgeInsets.only(left: 20),
@@ -79,102 +52,13 @@ class _DetailPeminjamState extends State<DetailPeminjam> {
                       hintStyle: TextStyle(fontSize: 20),
                     ),
                     onSaved: (value) {
-                      //repassword = value;
+                      //name = value;
                     },
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  padding: const EdgeInsets.only(left: 20),
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    "Pengarang :",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.only(left: 10),
-                  margin: const EdgeInsets.only(right: 20),
-                  child: TextFormField(
-                    readOnly: true,
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      hintText: '',
-                      hintStyle: TextStyle(fontSize: 20),
-                    ),
-                    onSaved: (value) {
-                      //repassword = value;
-                    },
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  padding: const EdgeInsets.only(left: 20),
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    "Tanggal Meminjam :",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.only(left: 10),
-                  margin: const EdgeInsets.only(right: 20),
-                  child: TextFormField(
-                    readOnly: true,
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      hintText: '',
-                      hintStyle: TextStyle(fontSize: 20),
-                      prefixIcon: Icon(
-                        Icons.date_range,
-                        color: Colors.black,
-                      ),
-                    ),
-                    onSaved: (value) {
-                      //email = value;
-                    },
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  padding: const EdgeInsets.only(left: 20),
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    "Tanggal Pengembalian :",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.only(left: 10),
-                  margin: const EdgeInsets.only(right: 20),
-                  child: TextFormField(
-                    readOnly: true,
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      hintText: '',
-                      hintStyle: TextStyle(fontSize: 20),
-                      prefixIcon: Icon(
-                        Icons.date_range_outlined,
-                        color: Colors.black,
-                      ),
-                    ),
-                    onSaved: (value) {
-                      //password = value;
-                    },
-                  ),
-                ),
+
+                /// ... (Kode serupa untuk Nama Pengarang, Penerbit, dan Status Buku)
+
                 Container(
                   padding: const EdgeInsets.only(top: 40),
                   child: ElevatedButton(

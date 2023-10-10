@@ -14,11 +14,11 @@ class DaftarBuku extends StatefulWidget {
 }
 
 class _DaftarBukuState extends State<DaftarBuku> {
-  var bc = BukuController();
+  var bc = BukuController(); /// Instance dari BukuController
 
   @override
   void initState() {
-    bc.getBuku();
+    bc.getBuku(); /// Memanggil metode untuk mendapatkan daftar buku
     super.initState();
   }
 
@@ -26,8 +26,8 @@ class _DaftarBukuState extends State<DaftarBuku> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.brown[100],
-      drawer: SideMenu(),
-      appBar: header(context),
+      drawer: SideMenu(), /// Menampilkan menu samping
+      appBar: header(context), /// Menampilkan header aplikasi
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,7 +38,7 @@ class _DaftarBukuState extends State<DaftarBuku> {
             ),
             Expanded(
               child: StreamBuilder<List<DocumentSnapshot>>(
-                stream: bc.stream,
+                stream: bc.stream, /// Menggunakan stream dari BukuController
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
                     return const Center(
@@ -57,8 +57,8 @@ class _DaftarBukuState extends State<DaftarBuku> {
                           child: Card(
                             elevation: 10,
                             child: ListTile(
-                              title: Text(data[index]["judulbuku"]),
-                              subtitle: Text(data[index]["selectedValue"]),
+                              title: Text(data[index]["judulbuku"]), // Menampilkan judul buku
+                              subtitle: Text(data[index]["selectedValue"]), // Menampilkan data terkait buku
                               trailing: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -68,7 +68,7 @@ class _DaftarBukuState extends State<DaftarBuku> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) => EditBuku(
-                                                bukuid: data[index]['bukuid'],
+                                                bukuid: data[index]['bukuid'], // Mengirim data ke halaman EditBuku
                                                 judulbuku: data[index]
                                                     ['judulbuku'],
                                                 pengarangbuku: data[index]
@@ -80,14 +80,14 @@ class _DaftarBukuState extends State<DaftarBuku> {
                                           ),
                                         );
                                       },
-                                      icon: Icon(Icons.mode_edit_outlined)),
+                                      icon: Icon(Icons.mode_edit_outlined)), // Tombol untuk mengedit buku
                                   IconButton(
                                     icon: const Icon(Icons.delete),
                                     onPressed: () {
                                       bc.removeBuku(
-                                          data[index]["bukuid"].toString());
+                                          data[index]["bukuid"].toString()); // Menghapus buku berdasarkan ID
                                       setState(() {
-                                        bc.getBuku();
+                                        bc.getBuku(); // Memperbarui daftar buku setelah menghapus
                                       });
                                     },
                                   ),
@@ -114,7 +114,7 @@ class _DaftarBukuState extends State<DaftarBuku> {
             ),
           );
         },
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add), /// Tombol untuk menambahkan buku baru
       ),
     );
   }

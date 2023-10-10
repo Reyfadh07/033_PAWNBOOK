@@ -128,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                               .signInWithEmailAndPassword(email!, password!);
 
                           if (registeredUser != null) {
-                            // Registration successful
+                            // Tampilkan dialog sukses jika login berhasil
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -138,13 +138,12 @@ class _LoginPageState extends State<LoginPage> {
                                   actions: <Widget>[
                                     TextButton(
                                       onPressed: () {
-                                        print(registeredUser.name);
+                                        // Navigasi ke halaman HomePage setelah login sukses
                                         Navigator.pushReplacement(context,
                                             MaterialPageRoute(
                                                 builder: (context) {
                                           return HomePage();
                                         }));
-                                        //Navigate to the next screen or perform any desired action
                                       },
                                       child: const Text('OK'),
                                     ),
@@ -153,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                               },
                             );
                           } else {
-                            // Registration failed
+                            // Tampilkan dialog gagal jika login gagal
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -196,6 +195,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       TextButton(
                         onPressed: () {
+                          // Navigasi ke halaman RegisterPage untuk mendaftar
                           Navigator.push(
                             context,
                             MaterialPageRoute(

@@ -50,6 +50,7 @@ class _AddBukuState extends State<AddBuku> {
             Form(
               key: _formKey,
               child: Column(children: [
+                /// Widget untuk memasukkan judul buku
                 Container(
                   margin: const EdgeInsets.only(top: 20),
                   padding: const EdgeInsets.only(left: 20),
@@ -77,6 +78,7 @@ class _AddBukuState extends State<AddBuku> {
                     },
                   ),
                 ),
+                /// Widget untuk memasukkan nama pengarang
                 Container(
                   margin: const EdgeInsets.only(top: 20),
                   padding: const EdgeInsets.only(left: 20),
@@ -104,6 +106,7 @@ class _AddBukuState extends State<AddBuku> {
                     },
                   ),
                 ),
+                /// Widget untuk memasukkan nama penerbit
                 Container(
                   margin: const EdgeInsets.only(top: 20),
                   padding: const EdgeInsets.only(left: 20),
@@ -131,6 +134,7 @@ class _AddBukuState extends State<AddBuku> {
                     },
                   ),
                 ),
+                /// Widget untuk memilih status buku
                 Container(
                   margin: const EdgeInsets.only(top: 20),
                   padding: const EdgeInsets.only(left: 20),
@@ -158,11 +162,13 @@ class _AddBukuState extends State<AddBuku> {
                         });
                       },
                     )),
+                /// Tombol untuk menyimpan buku
                 Container(
                   padding: const EdgeInsets.only(top: 40),
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        /// Membuat objek BukuModel dari input pengguna
                         BukuModel bm = BukuModel(
                           judulbuku: judulbuku!,
                           pengarangbuku: pengarangbuku!,
@@ -170,10 +176,14 @@ class _AddBukuState extends State<AddBuku> {
                           selectedValue: selectedValue!,
                         );
 
+                        /// Menambahkan buku menggunakan BukuController
                         bukuController.addBuku(bm);
+
+                        /// Menampilkan pesan sukses
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Buku Added')));
 
+                        /// Navigasi ke halaman DaftarBuku setelah menyimpan
                         Navigator.push(
                           context,
                           MaterialPageRoute(

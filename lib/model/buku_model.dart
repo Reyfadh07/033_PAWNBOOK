@@ -1,12 +1,13 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+/// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class BukuModel {
-  String? bukuid;
-  final String judulbuku;
-  final String pengarangbuku;
-  final String penerbitbuku;
-  final String selectedValue;
+  String? bukuid; /// ID buku (Opsional)
+  final String judulbuku; /// Judul buku (Wajib)
+  final String pengarangbuku; /// Nama pengarang buku (Wajib)
+  final String penerbitbuku; /// Nama penerbit buku (Wajib)
+  final String selectedValue; /// Nilai terpilih (Wajib)
+
   BukuModel({
     this.bukuid,
     required this.judulbuku,
@@ -15,6 +16,7 @@ class BukuModel {
     required this.selectedValue,
   });
 
+  ///Mengonversi objek BukuModel ke Map
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'bukuid': bukuid,
@@ -25,6 +27,7 @@ class BukuModel {
     };
   }
 
+  /// Membuat objek BukuModel dari Map
   factory BukuModel.fromMap(Map<String, dynamic> map) {
     return BukuModel(
       bukuid: map['bukuid'] != null ? map['bukuid'] as String : null,
@@ -35,7 +38,10 @@ class BukuModel {
     );
   }
 
+  /// Mengonversi objek BukuModel menjadi JSON
   String toJson() => json.encode(toMap());
 
-  factory BukuModel.fromJson(String source) => BukuModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  /// Membuat objek BukuModel dari JSON
+  factory BukuModel.fromJson(String source) =>
+      BukuModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

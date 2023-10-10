@@ -11,10 +11,12 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   @override
   void initState() {
-    // TODO: implement initState
+    // Menggunakan initState untuk menunda navigasi ke halaman beranda.
     super.initState();
 
+    // Menggunakan Future.delayed untuk menunggu selama 4 detik.
     Future.delayed(const Duration(seconds: 4)).then((value) {
+      // Setelah 4 detik, navigasikan pengguna ke halaman beranda.
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const HomePage(),
